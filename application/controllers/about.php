@@ -5,10 +5,10 @@ class about extends CI_Controller
 {
 	public function index()
 	{
-		$data['title'] = "Groepswerk - About page";
+		$data['title'] = "About Us";
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navigation');
-		// Hier de link naar de about view
+		$this->load->view('about');
 		$this->load->view('template/footer');
 	}
 }

@@ -1,4 +1,4 @@
 <?php
 
-echo '<h2>'.$contact->naam.'</h2>';
-echo $contact->email;
+echo 'Naam: '.$contact->naam.'</br>';
+echo 'Email: '.$contact->email;

@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-	<a class="navbar-brand" href="#">Groepswerk</a>
+	<a class="navbar-brand" href="#">
+        <img src="<?php echo base_url('assets/pics/pxl-logo.png') ?>" alt="PXL Logo">
+    </a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mijn-navbar"
 			aria-controls="mijn-navbar" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>

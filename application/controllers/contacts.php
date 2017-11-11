@@ -17,7 +17,7 @@ class contacts extends CI_Controller
     public function index()
 	{
         $data['contact_list'] = $this->repo->get_all();
-		$data['title'] = "Groepswerk - Contacts page";
+		$data['title'] = "All Contacts";
 
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navigation');
@@ -31,7 +31,7 @@ class contacts extends CI_Controller
         if(empty($data['contact'])){
             show_404();
         }
-        $data['title'] = "Groepswerk - Single contact";
+        $data['title'] = "Single Contact";
 
         $this->load->view('template/header', $data);
         $this->load->view('template/navigation');

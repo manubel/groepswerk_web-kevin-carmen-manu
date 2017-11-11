@@ -19,11 +19,11 @@ class ContactRepository extends CI_Model implements IContactRepository
         $query = $this->db->get('contacten');
         $rows =  $query->custom_result_object('Contact');
 
-        foreach ($rows as $row){
-            echo $row->id;
-            echo $row->naam;
-            echo $row->email;
-        }
+//        foreach ($rows as $row){
+//            echo $row->id;
+//            echo $row->naam;
+//            echo $row->email;
+//        }
 
         return $rows;
     }
@@ -33,11 +33,11 @@ class ContactRepository extends CI_Model implements IContactRepository
         $query = $this->db->get_where('contacten', array('ID'=>$id));
         $rows =  $query->custom_row_object(0,'Contact');
 
-        if (isset($row)){
-            echo $row->id;
-            echo $row->naam;
-            echo $row->email;
-        }
+//        if (isset($row)){
+//            echo $row->id;
+//            echo $row->naam;
+//            echo $row->email;
+//        }
         return $rows;
     }
 

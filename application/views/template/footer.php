@@ -1,4 +1,4 @@
-<footer>
+<footer class="container-fluid text-center">
 	<p>&copy; Groepswerk Carmen - Kevin - Manu</p>
 </footer>
 
