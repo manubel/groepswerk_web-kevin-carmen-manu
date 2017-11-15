@@ -41,8 +41,26 @@ class ContactRepository extends CI_Model implements IContactRepository
         return $rows;
     }
 
-    public function set_contact($contact)
+    public function set_contact($id = 0)
     {
-        //return contact::update($input);
+    	// Data uit POST ophalen via CI
+        $data = array(
+        	'naam' => $this->input->post('name'),
+			'email' => $this->input->post('email')
+		);
+
+        // Als functie opgeroepen wordt zonder id (vanuit create functie uit controller) dan inserten via CI
+		// Anders als id aanwezig is (vanuit update functie uit controller) dan updaten via CI
+        if ($id == 0) {
+        	return $this->db->insert('contacten', $data);
+		} else {
+        	$this->db->where('id', $id);
+        	return $this->db->update('contacten', $data);
+		}
     }
+
+    public function delete_contact($id){
+    	$this->db->where('id', $id);
+    	return $this->db->delete('contacten');
+	}
 }
