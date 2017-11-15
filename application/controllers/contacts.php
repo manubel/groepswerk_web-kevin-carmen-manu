@@ -3,20 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class contacts extends CI_Controller
 {
-    private $repo;
-
     public function __construct()
     {
         parent::__construct();
         $this->load->model('ContactRepository');
         $this->load->model('Contact');
-
-        $this->repo = new ContactRepository();
     }
 
     public function index()
 	{
-        $data['contact_list'] = $this->repo->get_all();
+        $data['contact_list'] = $this->ContactRepository->get_contacts();
 		$data['title'] = "All Contacts";
 
 		$this->load->view('template/header', $data);
@@ -26,7 +22,7 @@ class contacts extends CI_Controller
 	}
 
 	public function get($id){
-        $data['contact'] = $this->repo->get($id);
+        $data['contact'] = $this->ContactRepository->get_contact_by_id($id);
 
         if(empty($data['contact'])){
             show_404();

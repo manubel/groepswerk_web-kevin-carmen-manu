@@ -14,7 +14,7 @@ class ContactRepository extends CI_Model implements IContactRepository
         $this->load->database();
     }
 
-    public function get_all()
+    public function get_contacts()
     {
         $query = $this->db->get('contacten');
         $rows =  $query->custom_result_object('Contact');
@@ -28,7 +28,7 @@ class ContactRepository extends CI_Model implements IContactRepository
         return $rows;
     }
 
-    public function get($id)
+    public function get_contact_by_id($id)
     {
         $query = $this->db->get_where('contacten', array('ID'=>$id));
         $rows =  $query->custom_row_object(0,'Contact');
@@ -41,7 +41,7 @@ class ContactRepository extends CI_Model implements IContactRepository
         return $rows;
     }
 
-    public function update($contact)
+    public function set_contact($contact)
     {
         //return contact::update($input);
     }

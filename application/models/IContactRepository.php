@@ -8,7 +8,7 @@
 
 interface IContactRepository
 {
-    public function get_all();
-    public function get($id);
-    public function update($contact);
+    public function get_contacts();
+    public function get_contact_by_id($id);
+    public function set_contact($contact);
 }
