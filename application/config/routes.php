@@ -52,3 +52,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['contacts'] = 'contacts';
+$route['contacts/create'] = 'contacts/create';
+
+$route['contacts/edit/(:any)'] = 'contacts/edit/$1';
+
+$route['contacts/view/(:any)'] = 'contacts/view/$1';
+$route['contacts/(:any)'] = 'contacts/view/$1';
