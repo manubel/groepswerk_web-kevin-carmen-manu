@@ -10,5 +10,10 @@ interface IContactRepository
 {
     public function get_contacts();
     public function get_contact_by_id($id);
-    public function set_contact($contact);
+
+    public function create_contact($data);
+    public function update_contact($data);
+    public function delete_contact($id);
+
+
 }
