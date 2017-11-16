@@ -29,7 +29,7 @@
         </tbody>
     </table>
 
-<a href="#" class="btn btn-default" role="button" data-toggle="tooltip" title="New">
+<a href="<?php echo site_url('contacts/create'); ?>" class="btn btn-default" role="button" data-toggle="tooltip" title="New">
     <span class="fa fa-plus" aria-hidden="true"></span>
 </a>
 </div>

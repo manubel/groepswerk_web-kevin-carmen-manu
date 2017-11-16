@@ -5,7 +5,6 @@ class contacts extends CI_Controller
 {
     public function __construct()
     {
-        parent::__construct();
         $this->load->model('ContactRepository');
         $this->load->model('Contact');
     }
@@ -35,4 +34,28 @@ class contacts extends CI_Controller
         $this->load->view('template/footer');
     }
 
+	public function create(){
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$data['title'] = "Create a contact";
+
+		$this->form_validation->set_rules('name', 'name', 'required');
+		$this->form_validation->set_rules('email', 'email', 'required');
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/navigation');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('contactform');
+		}
+		else
+		{
+			$this->ContactRepository->set_contact();
+			$this->load->view('formsuccess');
+		}
+
+		$this->load->view('template/footer');
+	}
 }
