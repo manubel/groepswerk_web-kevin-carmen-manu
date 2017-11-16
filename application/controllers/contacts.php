@@ -5,6 +5,7 @@ class contacts extends CI_Controller
 {
     public function __construct()
     {
+    	parent::__construct();
         $this->load->model('ContactRepository');
         $this->load->model('Contact');
     }

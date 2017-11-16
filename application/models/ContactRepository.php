@@ -11,6 +11,7 @@ class ContactRepository extends CI_Model implements IContactRepository
 {
     public function __construct()
     {
+		parent::__construct();
         $this->load->database();
     }
 

@@ -14,6 +14,7 @@ class Contact extends CI_Model
 
     public function __construct($data = null)
     {
+		parent::__construct();
         if(is_array($data)){
             if(isset($data['id'])) $this->id = $data['id'];
 
