@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `contacten` (
-  `ID` int(100) NOT NULL,
+  `id` int(100) NOT NULL,
   `naam` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -36,7 +36,7 @@ CREATE TABLE `contacten` (
 -- Gegevens worden geëxporteerd voor tabel `contacten`
 --
 
-INSERT INTO `contacten` (`ID`, `naam`, `email`) VALUES
+INSERT INTO `contacten` (`id`, `naam`, `email`) VALUES
 (1, 'kevin', 'kevin.vandenheede@gmail.com'),
 (2, 'manu', 'manu.test@gmail.com'),
 (3, 'carmen', 'carmen.test@gmail.com');
@@ -49,7 +49,7 @@ INSERT INTO `contacten` (`ID`, `naam`, `email`) VALUES
 -- Indexen voor tabel `contacten`
 --
 ALTER TABLE `contacten`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -59,7 +59,7 @@ ALTER TABLE `contacten`
 -- AUTO_INCREMENT voor een tabel `contacten`
 --
 ALTER TABLE `contacten`
-  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
