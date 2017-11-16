@@ -52,7 +52,7 @@ class contacts extends CI_Controller
 		    $data['naam'] = $_POST["name"];
 		    $data['email'] = $_POST["email"];
 			$this->ContactRepository->create_contact($data);
-			$this->load->view('formsuccess');
+			$this->load->view('formSuccess');
 		}
 
 		$this->load->view('template/footer');
@@ -72,14 +72,14 @@ class contacts extends CI_Controller
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('contact', $person);
+            $this->load->view('editContact', $person);
         }
         else
         {
             $data['naam'] = $_POST["name"];
             $data['email'] = $_POST["email"];
             $this->ContactRepository->update_contact($id, $data);
-            $this->load->view('formsuccess');
+            $this->load->view('formSuccess');
         }
 
         $this->load->view('template/footer');
@@ -94,7 +94,10 @@ class contacts extends CI_Controller
 
         $this->ContactRepository->delete_contact($id);
 
-        $this->index();
+        $this->load->view('template/header');
+        $this->load->view('template/navigation');
+        $this->load->view('formsuccess');
+        $this->load->view('template/footer');
     }
 
     }
