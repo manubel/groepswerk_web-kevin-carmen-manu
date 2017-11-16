@@ -60,3 +60,5 @@ $route['contacts/edit/(:any)'] = 'contacts/edit/$1';
 
 $route['contacts/view/(:any)'] = 'contacts/view/$1';
 $route['contacts/(:any)'] = 'contacts/view/$1';
+
+$route['api/contacten/users/(:any)'] = 'api/contacten/users/id/$1';
