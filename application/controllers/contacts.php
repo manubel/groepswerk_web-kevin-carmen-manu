@@ -13,9 +13,8 @@ class contacts extends CI_Controller
     public function index()
 	{
         $data['contact_list'] = $this->ContactRepository->get_contacts();
-		$data['title'] = "All Contacts";
 
-		$this->load->view('template/header', $data);
+		$this->load->view('template/header');
 		$this->load->view('template/navigation');
         $this->load->view('overzicht', $data);
 		$this->load->view('template/footer');
@@ -27,9 +26,8 @@ class contacts extends CI_Controller
         if(empty($data['contact'])){
             show_404();
         }
-        $data['title'] = "Single Contact";
 
-        $this->load->view('template/header', $data);
+        $this->load->view('template/header');
         $this->load->view('template/navigation');
 	    $this->load->view('contact', $data);
         $this->load->view('template/footer');
@@ -39,24 +37,64 @@ class contacts extends CI_Controller
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$data['title'] = "Create a contact";
-
 		$this->form_validation->set_rules('name', 'name', 'required');
 		$this->form_validation->set_rules('email', 'email', 'required');
 
-		$this->load->view('template/header', $data);
+		$this->load->view('template/header');
 		$this->load->view('template/navigation');
 
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->load->view('contactform');
+			$this->load->view('newContact');
 		}
 		else
 		{
-			$this->ContactRepository->set_contact();
+		    $data['naam'] = $_POST["name"];
+		    $data['email'] = $_POST["email"];
+			$this->ContactRepository->create_contact($data);
 			$this->load->view('formsuccess');
 		}
 
 		$this->load->view('template/footer');
 	}
-}
+
+    public function update($id){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $person['contact'] = $this->ContactRepository->get_contact_by_id($id);
+
+        $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('email', 'email', 'required');
+
+        $this->load->view('template/header');
+        $this->load->view('template/navigation');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('contact', $person);
+        }
+        else
+        {
+            $data['naam'] = $_POST["name"];
+            $data['email'] = $_POST["email"];
+            $this->ContactRepository->update_contact($id, $data);
+            $this->load->view('formsuccess');
+        }
+
+        $this->load->view('template/footer');
+    }
+
+	public function delete($id){
+        $data['contact'] = $this->ContactRepository->get_contact_by_id($id);
+
+        if(empty($data['contact'])){
+            show_404();
+        }
+
+        $this->ContactRepository->delete_contact($id);
+
+        $this->index();
+    }
+
+    }
