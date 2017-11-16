@@ -1,3 +1,7 @@
-<h3>Your form was successfully submitted!</h3>
+<div class="container-fluid">
+    <h3>Your form was successfully submitted!</h3>
+    <p><?php echo anchor('contacts/create', 'Add another contact'); ?>
+        <?php echo anchor('contacts', 'Overzicht');?>
+    </p>
 
-<p><?php echo anchor('contacts/create', 'Try it again!'); ?></p>
+</div>
