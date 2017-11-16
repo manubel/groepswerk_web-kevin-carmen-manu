@@ -1,0 +1,47 @@
+#%RAML 1.0
+title: GroepswerkRestAPI
+version: v.0
+protocols: [ HTTP ]
+baseUri: http://192.168.33.22/groepswerk/api/contacten
+types:
+  Contact:
+    type: object
+    properties:
+      id: 		 number
+      naam:      string
+      email:     string
+  Contact_list:
+  	type: list
+    properties:
+      Contact:	 object
+/users:
+  get:
+    responses:
+      200:
+        application/json:
+            type: Contact_list
+
+  post:
+    responses:
+      200:
+        application/json:
+            type: Contact
+/users/{id}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Contact
+  put:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Contact
+  delete:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Contact
