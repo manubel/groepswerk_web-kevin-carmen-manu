@@ -3,39 +3,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class contacts extends CI_Controller
 {
-    public function __construct()
-    {
-    	parent::__construct();
-        $this->load->model('ContactRepository');
-        $this->load->model('Contact');
-    }
-
-    public function index()
+	public function __construct()
 	{
-        $data['contact_list'] = $this->ContactRepository->get_contacts();
+		parent::__construct();
+		$this->load->model('contact_repository');
+		$this->load->model('contact');
+	}
 
-		$this->load->view('template/header');
+	public function index()
+	{
+		$data['title'] = "Groepswerk Web Advanced - contacts";
+		$data['contact_list'] = $this->contact_repository->get_contacts();
+		$data['javascripts'] = ["assets/js/fetch.js"];
+
+		$this->load->view('template/header', $data);
 		$this->load->view('template/navigation');
-        $this->load->view('overzicht', $data);
+		$this->load->view('contacts/contacts_overview');
 		$this->load->view('template/footer');
 	}
 
-	public function get($id){
-        $data['contact'] = $this->ContactRepository->get_contact_by_id($id);
 
-        if(empty($data['contact'])){
-            show_404();
-        }
+	public function create()
+	{
+		$data['javascripts'] = ["assets/js/fetch.js"];
+		$this->load->view('template/header', $data);
+		$this->load->view('template/navigation');
+		$this->load->view('contacts/new_contact');
+		$this->load->view('template/footer');
+	}
 
-        $this->load->view('template/header');
-        $this->load->view('template/navigation');
-	    $this->load->view('contact', $data);
-        $this->load->view('template/footer');
-    }
-
-	public function create(){
+	public function update($id)
+	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+
+		$person['contact'] = $this->contact_repository->get_contact_by_id($id);
 
 		$this->form_validation->set_rules('name', 'name', 'required');
 		$this->form_validation->set_rules('email', 'email', 'required');
@@ -43,61 +45,31 @@ class contacts extends CI_Controller
 		$this->load->view('template/header');
 		$this->load->view('template/navigation');
 
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->load->view('newContact');
-		}
-		else
-		{
-		    $data['naam'] = $_POST["name"];
-		    $data['email'] = $_POST["email"];
-			$this->ContactRepository->create_contact($data);
-			$this->load->view('formSuccess');
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('contacts/edit_contact', $person);
+		} else {
+			$data['naam'] = $_POST["name"];
+			$data['email'] = $_POST["email"];
+			$this->contact_repository->update_contact($id, $data);
+			$this->load->view('contacts/contact_form_success');
 		}
 
 		$this->load->view('template/footer');
 	}
 
-    public function update($id){
-        $this->load->helper('form');
-        $this->load->library('form_validation');
+	public function delete($id)
+	{
+		$data['contact'] = $this->contact_repository->get_contact_by_id($id);
 
-        $person['contact'] = $this->ContactRepository->get_contact_by_id($id);
+		if (empty($data['contact'])) {
+			show_404();
+		}
 
-        $this->form_validation->set_rules('name', 'name', 'required');
-        $this->form_validation->set_rules('email', 'email', 'required');
+		$this->contact_repository->delete_contact($id);
 
-        $this->load->view('template/header');
-        $this->load->view('template/navigation');
-
-        if ($this->form_validation->run() == FALSE)
-        {
-            $this->load->view('editContact', $person);
-        }
-        else
-        {
-            $data['naam'] = $_POST["name"];
-            $data['email'] = $_POST["email"];
-            $this->ContactRepository->update_contact($id, $data);
-            $this->load->view('formSuccess');
-        }
-
-        $this->load->view('template/footer');
-    }
-
-	public function delete($id){
-        $data['contact'] = $this->ContactRepository->get_contact_by_id($id);
-
-        if(empty($data['contact'])){
-            show_404();
-        }
-
-        $this->ContactRepository->delete_contact($id);
-
-        $this->load->view('template/header');
-        $this->load->view('template/navigation');
-        $this->load->view('formsuccess');
-        $this->load->view('template/footer');
-    }
-
-    }
+		$this->load->view('template/header');
+		$this->load->view('template/navigation');
+		$this->load->view('contacts/contact_form_success');
+		$this->load->view('template/footer');
+	}
+}

@@ -5,7 +5,7 @@ class home extends CI_Controller
 {
 	public function index()
 	{
-		$data['title'] = "Home";
+		$data['title'] = "Groepswerk Web Advanced - Home";
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navigation');
 		$this->load->view('home');
