@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<form id="createContact" action="<?php echo site_url('contacts/create'); ?>">
+	<form id="createContact" action="<?php echo site_url('contacts'); ?>">
 		<div class="form-group">
 			<label for="name">Name</label>
 			<input type="text" class="form-control" name="name" id="name" value="" size="50"/>

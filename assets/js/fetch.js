@@ -41,9 +41,7 @@ function getContacts() {
 		})
 }
 
-function createContact(e) {
-	e.preventDefault();
-
+function createContact() {
 	let name = document.getElementById('name').value;
 	let email = document.getElementById('email').value;
 
