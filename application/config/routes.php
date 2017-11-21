@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['contacts'] = 'contacts';
 $route['contacts/create'] = 'contacts/create';
+$route['contacts/remove'] = 'contacts/delete';
 
 $route['contacts/edit/(:any)'] = 'contacts/edit/$1';
 

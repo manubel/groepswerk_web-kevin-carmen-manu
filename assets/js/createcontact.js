@@ -1,12 +1,4 @@
-function createContact() {
-	let name = document.getElementById('name').value;
-	let email = document.getElementById('email').value;
-
-	if (name === "" || email === "") {
-		alert("Didn't receive form details, please try again.");
-		return false;
-	}
-
+function createContact(name, email) {
 	fetch('http://192.168.33.22/groepwk/api/contacts', {
 		method: 'POST',
 		headers: {
@@ -27,25 +19,29 @@ function validateEmail(email) {
 }
 
 function validateName(name) {
-	let re = /[a-zA-Z]{5,}/;
+	let re = /[a-zA-Z]{3,}/;
 	return re.test(name);
 }
 
 function createContactValidator() {
-	$("#emailError").text("");
-	$("#nameError").text("");
-
 	let email = $("#email").val();
 	let name = $("#name").val();
 
-	if (!validateName(name)){
+	let errorPresent = false;
+
+	if (!validateName(name)) {
 		$("#nameError").text(name + " is not a valid name");
-	} else if (!validateEmail(email)) {
+		errorPresent = true;
+	}
+	if (!validateEmail(email)) {
 		$("#emailError").text(email + " is not a valid email");
-	} else {
-		createContact();
+		errorPresent = true;
+	}
+	if (!errorPresent){
+		createContact(name, email);
 		window.location = "http://192.168.33.22/groepwk/contacts";
 	}
+
 	return false;
 }
 

@@ -105,7 +105,8 @@ class contacts extends REST_Controller
 
 	public function contacts_delete()
 	{
-		$id = (int)$this->get('id');
+		$data = json_decode(file_get_contents('php://input'), true);
+		$id = $data['id'];
 
 		// Validate the id.
 		if ($id <= 0) {

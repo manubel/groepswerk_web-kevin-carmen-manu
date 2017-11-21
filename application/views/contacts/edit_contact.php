@@ -2,6 +2,7 @@
 
 <?php echo form_open('contacts/update/' . $contact->id); ?>
 <div class="container-fluid">
+	<form>
 	<div class="form-group">
 		<label for="name">Name</label>
 		<input type="text" class="form-control" name="name" id="name" value="<?php echo $contact->naam; ?>" size="50"/>
@@ -12,6 +13,5 @@
 			   size="50"/>
 	</div>
 	<div><input type="submit" value="Submit" class="btn btn-form"/></div>
-
 	</form>
 </div>

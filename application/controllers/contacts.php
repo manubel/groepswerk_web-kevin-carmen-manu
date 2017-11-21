@@ -57,19 +57,12 @@ class contacts extends CI_Controller
 		$this->load->view('template/footer');
 	}
 
-	public function delete($id)
+	public function delete()
 	{
-		$data['contact'] = $this->contact_repository->get_contact_by_id($id);
-
-		if (empty($data['contact'])) {
-			show_404();
-		}
-
-		$this->contact_repository->delete_contact($id);
-
-		$this->load->view('template/header');
+		$data['javascripts'] = ["assets/js/removecontact.js"];
+		$this->load->view('template/header', $data);
 		$this->load->view('template/navigation');
-		$this->load->view('contacts/contact_form_success');
+		$this->load->view('contacts/remove_contact');
 		$this->load->view('template/footer');
 	}
 }

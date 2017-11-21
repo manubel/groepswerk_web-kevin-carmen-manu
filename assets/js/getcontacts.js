@@ -17,16 +17,13 @@ function getContacts() {
 				table += `
             <tr>
                 <td>
-                    <a href="${document.location}/${contact.id}">${contact.naam}</a>
+                    <a href="#">${contact.naam}</a>
                 </td>
                 <td>${contact.email}</td>
                 <td>
                     <div class="btn-group">
-                    <a href="${document.location}/update/${contact.id}"  class="btn btn-default" role="button" data-toggle="tooltip" title="Edit">
+                    <a href="${document.location}/update/${contact.id}"  class="btn btn-default" role="button" data-toggle="tooltip" title="Edit" id="updateContact${+contact.id}">
                         <span class="fa fa-pencil" aria-hidden="true"></span>
-                    </a>
-                    <a href="${document.location}/delete/${contact.id}"  class="btn btn-default" role="button" data-toggle="tooltip" title="Remove">
-                        <span class="fa fa-times" aria-hidden="true"></span>
                     </a>
                     </div>
                 </td>
@@ -37,7 +34,8 @@ function getContacts() {
 						</tbody>
     					</table>
 					`;
-			document.getElementById('contacts-table').innerHTML = table;
+
+			$("#contacts-table").html(table);
 		})
 }
 
