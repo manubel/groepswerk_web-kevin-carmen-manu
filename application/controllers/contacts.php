@@ -14,7 +14,7 @@ class contacts extends CI_Controller
 	{
 		$data['title'] = "Groepswerk Web Advanced - contacts";
 		$data['contact_list'] = $this->contact_repository->get_contacts();
-		$data['javascripts'] = ["assets/js/fetch.js"];
+		$data['javascripts'] = ["assets/js/getcontacts.js"];
 
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navigation');
@@ -25,7 +25,7 @@ class contacts extends CI_Controller
 
 	public function create()
 	{
-		$data['javascripts'] = ["assets/js/fetch.js"];
+		$data['javascripts'] = ["assets/js/createcontact.js"];
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navigation');
 		$this->load->view('contacts/new_contact');

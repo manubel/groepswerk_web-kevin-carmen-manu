@@ -41,27 +41,5 @@ function getContacts() {
 		})
 }
 
-function createContact() {
-	let name = document.getElementById('name').value;
-	let email = document.getElementById('email').value;
-
-	fetch('http://192.168.33.22/groepwk/api/contacts', {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-type': 'application/json'
-		},
-		body: JSON.stringify({name: name, email: email})
-	})
-		.then((res) => res.json())
-		.then((data => console.log(data)))
-}
-
-const pathName = document.location.pathname;
-if (pathName.endsWith("contacts") || pathName.endsWith("contacts/")) {
-	window.onload = getContacts;
-	document.getElementById('getContacts').addEventListener('click', getContacts);
-}
-if (document.getElementById('createContact') !== null) document.getElementById('createContact').addEventListener('submit', createContact);
-
-console.log(document.location.pathname);
+window.onload = getContacts;
+document.getElementById('getContacts').addEventListener('click', getContacts);
