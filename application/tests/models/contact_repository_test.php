@@ -1,5 +1,5 @@
 <?php
-require_once ('application/models/contact.php');
+require (__DIR__ .'/../../models/contact.php');
 
 use PHPUnit\Framework\TestCase;
 
