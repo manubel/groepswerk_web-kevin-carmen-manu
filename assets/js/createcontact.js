@@ -1,5 +1,7 @@
 function createContact(name, email) {
-	fetch('http://192.168.33.22/groepwk/api/contacts', {
+	let apiLink = window.location.href.replace("contacts/create", "api/contacts");
+
+	fetch(apiLink, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',

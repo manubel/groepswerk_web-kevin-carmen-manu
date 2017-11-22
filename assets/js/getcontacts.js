@@ -1,5 +1,7 @@
 function getContacts() {
-	fetch('http://192.168.33.22/groepwk/api/contacts')
+	let apiLink = window.location.href.replace("contacts", "api/contacts");
+
+	fetch(apiLink)
 		.then((res) => res.json())
 		.then((data) => {
 			let table = `

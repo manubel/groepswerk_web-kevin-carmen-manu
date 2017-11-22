@@ -1,5 +1,6 @@
 function getContacts() {
-	fetch('http://192.168.33.22/groepwk/api/contacts')
+	let apiLink = window.location.href.replace("contacts/remove", "api/contacts");
+	fetch(apiLink)
 		.then((res) => res.json())
 		.then((data) => {
 			let options = `
@@ -24,9 +25,9 @@ function removeContact() {
 	let selectElement = document.getElementById("contactsSelect");
 	let selectedValue = selectElement.options[selectElement.selectedIndex].value;
 
-	console.log(JSON.stringify({id:selectedValue}));
+	let apiLink = window.location.href.replace("contacts/remove", "api/contacts");
 
-	fetch('http://192.168.33.22/groepwk/api/contacts', {
+	fetch(apiLink, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
