@@ -97,7 +97,7 @@ class contacts extends REST_Controller
             'email' => $this->input->put('email')
         );*/
 		$data = json_decode(file_get_contents('php://input'), true);
-		$this->contact_repository->update_contact($id, $data);
+		$this->contact_repository->update_contact($data);
 
 		$this->set_response($data, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
 	}

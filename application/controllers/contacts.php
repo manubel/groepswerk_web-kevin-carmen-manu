@@ -48,9 +48,11 @@ class contacts extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('contacts/edit_contact', $person);
 		} else {
-			$data['naam'] = $_POST["name"];
-			$data['email'] = $_POST["email"];
-			$this->contact_repository->update_contact($id, $data);
+		    $data = new contact;
+			$data->naam = $_POST["name"];
+			$data->email = $_POST["email"];
+			$data->id = $id;
+			$this->contact_repository->update_contact($data);
 			$this->load->view('contacts/contact_form_success');
 		}
 

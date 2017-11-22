@@ -36,9 +36,10 @@ function removeContact() {
 		body: JSON.stringify({id: selectedValue})
 	})
 		.then((res) => {
-			console.log(res.json())
+        let apiLink = window.location.href.replace("contacts/remove", "contacts");
+        window.location = apiLink;
 		});
-	window.location = "http://192.168.33.22/groepwk/contacts";
+
 }
 
 window.onload = getContacts();

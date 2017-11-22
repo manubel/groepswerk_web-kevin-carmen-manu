@@ -41,7 +41,8 @@ function createContactValidator() {
 	}
 	if (!errorPresent){
 		createContact(name, email);
-		window.location = "http://192.168.33.22/groepwk/contacts";
+        let apiLink = window.location.href.replace("contacts/create", "contacts");
+		window.location = apiLink;
 	}
 
 	return false;

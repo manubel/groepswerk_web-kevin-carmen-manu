@@ -2,47 +2,69 @@
 /**
  * Created by PhpStorm.
  * User: Ik
- * Date: 6/11/2017
- * Time: 14:53
+ * Date: 20/11/2017
+ * Time: 13:58
  */
-require_once('contact_repository_interface.php');
+require_once ('contact_repository_interface.php');
+require_once ('contact_dao.php');
 
-class contact_repository extends CI_Model implements contact_repository_interface
+class contact_repository implements contact_repository_interface
 {
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->database();
-	}
+    private $contact_dao = null;
 
-	public function get_contacts()
-	{
-		$query = $this->db->get('contacten');
-		$rows = $query->custom_result_object('contact');
-		return $rows;
-	}
+    public function __construct( contact_dao_interface $contact_dao = null)
+    {
+        if($contact_dao!=null){
+            $this->contact_dao = $contact_dao;
 
-	public function get_contact_by_id($id)
-	{
-		$query = $this->db->get_where('contacten', array('id' => $id));
-		$rows = $query->custom_row_object(0, 'contact');
-		return $rows;
-	}
+        } else{
+            $this->contact_dao = new contact_dao();
+        }
+    }
 
-	public function create_contact($data)
-	{
-		return $this->db->insert('contacten', $data);
-	}
+    public function get_contacts()
+    {
+        $contacts = null;
+        $contacts = $this->contact_dao->get_all();
+        return $contacts;
+    }
 
-	public function update_contact($id, $data)
-	{
-		$this->db->where('id', $id);
-		return $this->db->update('contacten', $data);
-	}
+    public function get_contact_by_id($id)
+    {
+        $contact =null;
+        if ($this->isValidId($id)) {
+            $contact = $this->contact_dao->get_by_id($id);
+        }
+        return $contact;
+    }
 
-	public function delete_contact($id)
-	{
-		$this->db->where('id', $id);
-		return $this->db->delete('contacten');
-	}
+    public function create_contact($contact)
+    {
+        $this->contact_dao->create($contact);
+    }
+
+    public function update_contact($contact)
+    {
+        if ($this->isValidId($contact->id)) {
+            $this->contact_dao->update($contact);
+        }
+
+    }
+
+    public function delete_contact($id)
+    {
+        if ($this->isValidId($id)) {
+            $this->contact_dao->delete($id);
+        }
+
+    }
+
+    private function isValidId($id)
+    {
+        if (is_string($id) && ctype_digit(trim($id))) {
+            $id=(int)$id;
+        }
+        return is_integer($id) and $id >= 0;
+    }
+
 }
